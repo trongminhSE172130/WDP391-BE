@@ -3,24 +3,15 @@ const nodemailer = require("nodemailer");
 
 exports.register = async (req, res, next) => {
   try {
-    const { fullName, email, password, gender, dob, phone } = req.body;
-
-    // Validate required fields
-    if (!fullName || !email || !password) {
-      return res.status(400).json({
-        success: false,
-        error: "Please provide fullName, email, and password",
-      });
-    }
+    const { name, email, password, role } = req.body;
 
     const result = await authService.register({
-      fullName,
+      name,
       email,
       password,
-      gender,
       dob,
       phone,
-      role: "user", // Default to user role
+      role: role || "user", // Default to user if no role specified
     });
 
     res.status(201).json({
@@ -28,11 +19,8 @@ exports.register = async (req, res, next) => {
       data: {
         user: {
           id: result.user._id,
-          fullName: result.user.fullName,
+          name: result.user.name,
           email: result.user.email,
-          gender: result.user.gender,
-          dob: result.user.dob,
-          phone: result.user.phone,
           role: result.user.role,
         },
         token: result.token,
@@ -62,12 +50,8 @@ exports.login = async (req, res, next) => {
       data: {
         user: {
           id: result.user._id,
-          fullName: result.user.fullName,
+          name: result.user.name,
           email: result.user.email,
-          gender: result.user.gender,
-          dob: result.user.dob,
-          phone: result.user.phone,
-          address: result.user.address,
           role: result.user.role,
         },
         token: result.token,

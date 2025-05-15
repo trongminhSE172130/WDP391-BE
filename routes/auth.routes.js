@@ -24,23 +24,17 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             required:
- *               - fullName
+ *               - name
  *               - email
  *               - password
  *             properties:
- *               fullName:
+ *               name:
  *                 type: string
  *               email:
  *                 type: string
  *               password:
  *                 type: string
- *               gender:
- *                 type: string
- *                 enum: [male, female]
- *               dob:
- *                 type: string
- *                 format: date
- *               phone:
+ *               role:
  *                 type: string
  *     responses:
  *       201:
@@ -91,33 +85,6 @@ router.post("/login", login);
  *     responses:
  *       200:
  *         description: Current user data
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                 data:
- *                   type: object
- *                   properties:
- *                     _id:
- *                       type: string
- *                     fullName:
- *                       type: string
- *                     email:
- *                       type: string
- *                     gender:
- *                       type: string
- *                     dob:
- *                       type: string
- *                       format: date
- *                     phone:
- *                       type: string
- *                     address:
- *                       type: string
- *                     role:
- *                       type: string
  *       401:
  *         description: Unauthorized
  */
