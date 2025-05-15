@@ -43,6 +43,10 @@ const swaggerOptions = {
     },
     servers: [
       {
+        url: `https://your-domain.com/api`, // Thay your-domain.com bằng tên miền thực của bạn
+        description: "Production Server",
+      },
+      {
         url: `http://localhost:${process.env.PORT || 5000}/api`,
       },
     ],
