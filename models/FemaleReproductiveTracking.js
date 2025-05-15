@@ -66,16 +66,10 @@ const FemaleReproductiveTrackingSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  updated_at: {
-    type: Date,
-    default: Date.now,
-  },
 });
 
 // Calculate ovulation day and fertility window before saving
 FemaleReproductiveTrackingSchema.pre("save", function (next) {
-  this.updated_at = Date.now();
-
   // Calculate ovulation day (typically 14 days before the next period)
   const cycleStartDate = new Date(this.cycle_start_date);
   const ovulationDate = new Date(cycleStartDate);
