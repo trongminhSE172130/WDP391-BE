@@ -43,10 +43,6 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: `https://wdp-391-be.vercel.app/api`, // Thay your-domain.com bằng tên miền thực của bạn
-        description: "Production Server",
-      },
-      {
         url: `http://localhost:${process.env.PORT || 5000}/api`,
       },
     ],
