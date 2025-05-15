@@ -37,9 +37,9 @@ const swaggerOptions = {
   swaggerDefinition: {
     openapi: "3.0.0",
     info: {
-      title: "Sexual Health Management API",
+      title: "GenHealth Center API",
       version: "1.0.0",
-      description: "API for Sexual Health Management System",
+      description: "API for GenHealth Center System",
     },
     servers: [
       {
@@ -51,7 +51,7 @@ const swaggerOptions = {
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use("/GenHealth-Center", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Initialize scheduler
 scheduler.init();
@@ -62,7 +62,9 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(
+    `Server running on port http://localhost:${PORT}/GenHealth-Center`
+  );
 });
 
 // Handle unhandled promise rejections
