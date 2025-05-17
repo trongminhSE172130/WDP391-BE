@@ -13,17 +13,30 @@ const ConsultantBookingSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["pending", "completed", "cancelled"],
+    enum: ["pending", "confirmed", "completed", "cancelled"],
     default: "pending",
   },
   question: {
     type: String,
     required: [true, "Please provide a question or reason for consultation"],
   },
+  meeting_link: {
+    type: String,
+  },
   created_at: {
     type: Date,
     default: Date.now,
   },
+  updated_at: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+// Update the updated_at field before saving
+ConsultantBookingSchema.pre("save", function (next) {
+  this.updated_at = Date.now();
+  next();
 });
 
 module.exports = mongoose.model("ConsultantBooking", ConsultantBookingSchema);

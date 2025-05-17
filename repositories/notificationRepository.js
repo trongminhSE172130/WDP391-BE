@@ -32,7 +32,7 @@ class NotificationRepository {
     return await Notification.find({
       send_at: { $lte: now },
       is_sent: false,
-    }).populate("user_id", "full_name email");
+    }).populate("user_id", "fullName email");
   }
 
   async markAsSent(id) {

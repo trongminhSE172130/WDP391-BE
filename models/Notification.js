@@ -8,7 +8,14 @@ const NotificationSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ["ovulation", "pill_reminder", "fertility_window"],
+    enum: [
+      "ovulation",
+      "pill_reminder",
+      "fertility_window",
+      "booking",
+      "booking_confirmed",
+      "booking_cancelled",
+    ],
     required: true,
   },
   message: {

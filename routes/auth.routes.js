@@ -17,6 +17,7 @@ const router = express.Router();
  *   post:
  *     summary: Register a user
  *     tags: [Authentication]
+ *     description: Register a new user. All users are automatically assigned the "user" role.
  *     requestBody:
  *       required: true
  *       content:
@@ -45,6 +46,38 @@ const router = express.Router();
  *     responses:
  *       201:
  *         description: User registered successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     user:
+ *                       type: object
+ *                       properties:
+ *                         id:
+ *                           type: string
+ *                         fullName:
+ *                           type: string
+ *                         email:
+ *                           type: string
+ *                         gender:
+ *                           type: string
+ *                         dob:
+ *                           type: string
+ *                         phone:
+ *                           type: string
+ *                         role:
+ *                           type: string
+ *                           description: Always set to "user" for new registrations
+ *                           example: user
+ *                     token:
+ *                       type: string
  *       400:
  *         description: Bad request
  */

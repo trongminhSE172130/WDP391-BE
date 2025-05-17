@@ -21,16 +21,20 @@ app.use(cors());
 
 // Define Routes
 app.use("/api/auth", require("./routes/auth.routes"));
-// app.use('/api/users', require('./routes/user.routes'));
-// app.use('/api/menstrual-cycles', require('./routes/menstrualCycle.routes'));
-// app.use('/api/consultations', require('./routes/consultation.routes'));
-// app.use('/api/questions', require('./routes/question.routes'));
-// app.use('/api/sti-tests', require('./routes/stiTest.routes'));
-// app.use('/api/services', require('./routes/service.routes'));
-// app.use('/api/consultants', require('./routes/consultant.routes'));
-// app.use('/api/feedback', require('./routes/feedback.routes'));
-// app.use('/api/blogs', require('./routes/blog.routes'));
-// app.use('/api/dashboard', require('./routes/dashboard.routes'));
+app.use(
+  "/api/female-reproductive-tracking",
+  require("./routes/femaleReproductiveTracking.routes")
+);
+app.use("/api/notifications", require("./routes/notification.routes"));
+app.use("/api/consultants", require("./routes/consultant.routes"));
+app.use(
+  "/api/consultant-schedules",
+  require("./routes/consultantSchedule.routes")
+);
+app.use(
+  "/api/consultant-bookings",
+  require("./routes/consultantBooking.routes")
+);
 
 // Swagger configuration
 const swaggerOptions = {
@@ -46,6 +50,77 @@ const swaggerOptions = {
         url: `http://localhost:${process.env.PORT || 5000}/api`,
       },
     ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+      responses: {
+        UnauthorizedError: {
+          description: "Access token is missing or invalid",
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  success: {
+                    type: "boolean",
+                    example: false,
+                  },
+                  error: {
+                    type: "string",
+                    example: "Not authorized to access this route",
+                  },
+                },
+              },
+            },
+          },
+        },
+        BadRequestError: {
+          description: "Invalid request parameters",
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  success: {
+                    type: "boolean",
+                    example: false,
+                  },
+                  error: {
+                    type: "string",
+                    example: "Invalid input data",
+                  },
+                },
+              },
+            },
+          },
+        },
+        NotFoundError: {
+          description: "Resource not found",
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  success: {
+                    type: "boolean",
+                    example: false,
+                  },
+                  error: {
+                    type: "string",
+                    example: "Resource not found",
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
   apis: ["./routes/*.js"],
 };

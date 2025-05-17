@@ -13,6 +13,7 @@ exports.register = async (req, res, next) => {
       });
     }
 
+    // If role is provided in the request, ignore it and always set to "user"
     const result = await authService.register({
       fullName,
       email,
@@ -20,7 +21,7 @@ exports.register = async (req, res, next) => {
       gender,
       dob,
       phone,
-      role: "user", // Default to user role
+      role: "user", // Always default to user role regardless of request input
     });
 
     res.status(201).json({
